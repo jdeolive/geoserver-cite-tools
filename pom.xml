@@ -36,8 +36,8 @@
   <delete dir="${engine}/components/cite1"/>
 
   <!-- delete test scripts -->
-  <delete includeemptydirs="true">
-    <fileset dir="${engine}/scripts" includes="**/*"/>
+  <delete includeemptydirs="true"> 
+    <fileset dir="${engine}" includes="scripts/**/*"/>
   </delete>
 
   <!-- clean the engine -->
@@ -116,6 +116,8 @@
     <fileset dir="${basedir}" includes="cite1/**/*"/>
   </copy>
  
+  <mkdir dir="${engine}/custom/templates"/>
+
   <!-- create the engine build.properties file -->
   <copy file="${basedir}/engine.build.properties" 
      tofile="${engine}/build.properties">
