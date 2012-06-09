@@ -1,0 +1,152 @@
+<project name="cite_tools" default="usage">
+
+  <property name="enginedir" value="${basedir}/engine"/>
+  <property name="scriptdir" value="${basedir}/engine/scripts"/>
+  <property name="workdir" value="${basedir}/target/work"/>
+  <property name="logdir" value="${basedir}/users/geoserver"/>
+
+
+  <condition property="script.ext" value="bat" else="sh">
+    <os family="windows"/>
+  </condition>
+  <condition property="script.exe" value="cmd" else="sh">
+    <os family="windows"/>
+  </condition>
+
+  <target name="usage">
+    <echo message=""/>
+    <echo message="Targets:"/>
+    <echo message=""/>
+    <echo message=" wfs-1.0        --&gt; Run WFS 1.0 tests"/>
+    <echo message=" wfs-1.0-log    --&gt; View WFS 1.0 test log"/>
+    <echo message=" wfs-1.1        --&gt; Run WFS 1.1 tests"/>
+    <echo message=" wfs-1.1-log    --&gt; View WFS 1.1 test log"/>
+    <echo message=" wms-1.1        --&gt; Run WMS 1.1 tests"/>
+    <echo message=" wms-1.1-log    --&gt; View WMS 1.1 test log"/>
+    <echo message=" wms-1.3        --&gt; Run WMS 1.3 tests"/>
+    <echo message=" wms-1.3-log    --&gt; View WMS 1.3 test log"/>
+    <echo message=" wcs-1.0        --&gt; Run WCS 1.0 tests"/>
+    <echo message=" wcs-1.0-log    --&gt; View WCS 1.0 test log"/>
+    <echo message=" wcs-1.1        --&gt; Run WCS 1.1 tests"/>
+    <echo message=" wcs-1.1-log    --&gt; View WCS 1.1 test log"/>
+    <echo message=" clean          --&gt; Cleans results from previous test runs"/>
+    <echo message=" webapp         --&gt; Runs teamengine web application"/>
+  </target>
+
+  <target name="clean">
+    <delete includeemptydirs="true">
+      <fileset dir="users/geoserver" includes="**/*"/>
+    </delete>
+  </target>
+
+  <target name="webapp">
+    <exec dir="${enginedir}" executable="mvn">
+      <env key="MAVEN_OPTS" value="-Xmx512m"/>
+      <arg line="jetty:run-exploded"/>
+    </exec>
+  </target>
+
+  <target name="wfs-1.0">
+    <antcall target="run-test">
+      <param name="sources" 
+        value="-source=${scriptdir}/wfs-1.0.0/ctl/wfs.xml"/>
+      <param name="session" value="wfs-1.0.0"/>
+    </antcall>
+  </target>
+  <target name="wfs-1.0-log">
+    <antcall target="view-log">
+      <param name="session" value="wfs-1.0.0"/>
+    </antcall>
+  </target>
+
+  <target name="wfs-1.1">
+    <antcall target="run-test">
+      <param name="sources" 
+        value="-source=${scriptdir}/wfs-1.1.0/ctl/all.xml"/>
+      <param name="session" value="wfs-1.1.0"/>
+    </antcall>
+  </target>
+  <target name="wfs-1.1-log">
+    <antcall target="view-log">
+      <param name="session" value="wfs-1.1.0"/>
+    </antcall>
+  </target>
+  
+  <target name="wms-1.1">
+    <antcall target="run-test">
+      <param name="sources" value="-source=${scriptdir}/wms-1.1.1/ctl/functions.xml -source=${scriptdir}/wms-1.1.1/ctl/wms.xml" />
+      <param name="session" value="wms-1.1.1"/>
+    </antcall>
+  </target>
+  <target name="wms-1.1-log">
+    <antcall target="view-log">
+      <param name="session" value="wms-1.1.1"/>
+    </antcall>
+  </target>
+
+  <target name="wms-1.3">
+    <property name="ctldir" value="${scriptdir}/wms-1.3.0/ctl"/>
+    <antcall target="run-test">
+      <param name="sources" value="-source=${ctldir}/functions.xml -source=${ctldir}/interactive.xml -source=${ctldir}/basic_elements.xml -source=${ctldir}/getcapabilities.xml -source=${ctldir}/getmap.xml -source=${ctldir}/getfeatureinfo.xml -source=${ctldir}/recommendations.xml -source=${ctldir}/dimensions.xml -source=${ctldir}/main.xml" />
+      <param name="session" value="wms-1.3.0"/>
+    </antcall>
+  </target>
+  <target name="wms-1.3-log">
+    <antcall target="view-log">
+      <param name="session" value="wms-1.3.0"/>
+    </antcall>
+  </target>
+
+  <target name="wcs-1.0">
+    <antcall target="run-test">
+      <param name="sources" value="-source=${scriptdir}/wcs-1.0.0/ctl/wcs.xml" />
+      <param name="session" value="wcs-1.0.0"/>
+    </antcall>
+  </target>
+  <target name="wcs-1.0-log">
+    <antcall target="view-log">
+      <param name="session" value="wcs-1.0.0"/>
+    </antcall>
+  </target>
+
+  <target name="wcs-1.1">
+    <antcall target="run-test">
+      <param name="sources" value="-source=${scriptdir}/wcs-1.1.1/ctl/wcs.xml" />
+      <param name="session" value="wcs-1.1.1"/>
+    </antcall>
+  </target>
+  <target name="wcs-1.1-log">
+    <antcall target="view-log">
+      <param name="session" value="wcs-1.1.1"/>
+    </antcall>
+  </target>
+
+  <!-- 
+   Fires up the engine. 
+  
+   Takes the following parameters:
+
+     session : Session name, ex 'wfs-1.0.0' 
+     sources : Test sources, ex '-source=engine/scripts/wfs-1.0.0/ctl/wfs.xml'
+   -->
+  <target name="run-test">
+    <exec dir="." executable="${script.exe}">
+      <env key="JAVA_OPTS" value="-Xmx512m"/>
+      <!--env key="JAVA_OPTS" value="-Xmx512m -Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8000"/-->
+      <arg line="${enginedir}/bin/test.${script.ext}"/>
+      <arg line="-mode=test -workdir=${workdir} -logdir=${logdir} -session=${session} ${sources}"/>
+    </exec>
+    <copy file="${basedir}/target/sessions/session.xml.${session}" 
+      tofile="${logdir}/${session}/session.xml"/>
+  </target>
+
+  <target name="view-log">
+    <exec dir="." executable="${script.exe}">
+      <env key="JAVA_OPTS" value="-Xmx512m"/>
+      <arg line="${enginedir}/bin/viewlog.${script.ext}"/>
+      <arg line="-logdir=${logdir} -session=${session}"/>
+    </exec>
+  </target>
+
+
+</project>
