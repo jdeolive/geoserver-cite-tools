@@ -60,6 +60,8 @@
     <classpath refid="maven.dependency.classpath"/>
   </typedef>
 
+  <mkdir dir="${scripts}"/>
+
   <!-- copy the test scripts over -->
   <if>
     <available file="${tests}/wfs/1.0.0"/>
