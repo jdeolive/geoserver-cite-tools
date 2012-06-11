@@ -13,11 +13,11 @@ Building the Tools
 
 1. Clone the ``geoserver-cite-tools`` repository:
 
-       % git clone git://github.com/jdeolive/geoserver-cite-tools.git 
+        % git clone git://github.com/jdeolive/geoserver-cite-tools.git 
 
 1. Build the tools with maven:
 
-       % mvn install
+        % mvn install
 
 Testing from Command Line
 -------------------------
