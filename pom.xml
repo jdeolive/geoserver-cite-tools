@@ -270,7 +270,7 @@
     <maven.build.timestamp.format>yyyy-MM-dd</maven.build.timestamp.format>
 
     <engine>${basedir}/engine</engine>
-    <tests>${basedir}/tests</tests>
+    <tests>${basedir}/../scripts</tests>
     <scripts>${engine}/scripts</scripts>
 
     <wfs10.rev>r3</wfs10.rev>
@@ -282,7 +282,7 @@
     <wms13.rev>r3</wms13.rev>
     <wms13.tag>tags/r3</wms13.tag>
     <wcs10.rev>r2</wcs10.rev>
-    <wcs10.tag>tags/r2</wcs10.tag>
+    <wcs10.tag>trunk</wcs10.tag>
     <wcs11.rev>r0</wcs11.rev>
     <wcs11.tag>tags/r0</wcs11.tag>
   </properties>
