@@ -270,7 +270,7 @@
     <maven.build.timestamp.format>yyyy-MM-dd</maven.build.timestamp.format>
 
     <engine>${basedir}/engine</engine>
-    <tests>${basedir}/../scripts</tests>
+    <tests>${basedir}/tests</tests>
     <scripts>${engine}/scripts</scripts>
 
     <wfs10.rev>r3</wfs10.rev>
