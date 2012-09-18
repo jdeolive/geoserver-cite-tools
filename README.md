@@ -46,6 +46,8 @@ to show information about available targets:
      [echo]  wcs-1.0-log    --> View WCS 1.0 test log
      [echo]  wcs-1.1        --> Run WCS 1.1 tests
      [echo]  wcs-1.1-log    --> View WCS 1.1 test log
+     [echo]  cs2-2.0.2      --> Run CSW 2.0.2 tests
+     [echo]  cs2-2.0.2-log  --> View CSW 2.0.2 test log
      [echo]  clean          --> Cleans results from previous test runs
      [echo]  webapp         --> Runs teamengine web application
 

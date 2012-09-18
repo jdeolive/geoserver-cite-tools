@@ -29,6 +29,8 @@
     <echo message=" wcs-1.0-log    --&gt; View WCS 1.0 test log"/>
     <echo message=" wcs-1.1        --&gt; Run WCS 1.1 tests"/>
     <echo message=" wcs-1.1-log    --&gt; View WCS 1.1 test log"/>
+    <echo message=" csw-2.0.2      --&gt; Run CSW 2.0.2 tests"/>
+    <echo message=" csw-2.0.2-log  --&gt; View CSW 2.0.2 test log"/>
     <echo message=" clean          --&gt; Cleans results from previous test runs"/>
     <echo message=" webapp         --&gt; Runs teamengine web application"/>
   </target>
@@ -118,6 +120,18 @@
   <target name="wcs-1.1-log">
     <antcall target="view-log">
       <param name="session" value="wcs-1.1.1"/>
+    </antcall>
+  </target>
+
+  <target name="csw-2.0.2">
+    <antcall target="run-test">
+      <param name="sources" value="-source=${scriptdir}/csw-2.0.2/ctl/all.xml" />
+      <param name="session" value="csw-2.0.2"/>
+    </antcall>
+  </target>
+  <target name="csw-2.0.2-log">
+    <antcall target="view-log">
+      <param name="session" value="csw-2.0.2"/>
     </antcall>
   </target>
 

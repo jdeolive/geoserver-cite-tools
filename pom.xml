@@ -111,6 +111,14 @@
       </copy>
     </then>
   </if>
+  <if>
+    <available file="${tests}/csw/2.0.2"/>
+    <then>
+      <copy todir="${scripts}/csw-2.0.2">
+         <fileset dir="${tests}/csw/2.0.2/${csw202.tag}" includes="**/*"/>
+      </copy>
+    </then>
+  </if>
 
   <!-- copy over cite1 component -->
   <mkdir dir="${engine}/components"/>
@@ -156,6 +164,7 @@
       <filter token="wms13.rev" value="${wms13.rev}"/>
       <filter token="wcs10.rev" value="${wcs10.rev}"/>
       <filter token="wcs11.rev" value="${wcs11.rev}"/>
+      <filter token="cs2202.rev" value="${csw202.rev}"/>
     </filterset>
   </copy>
                </tasks> 
@@ -285,5 +294,7 @@
     <wcs10.tag>trunk</wcs10.tag>
     <wcs11.rev>r0</wcs11.rev>
     <wcs11.tag>tags/r0</wcs11.tag>
+    <csw202.rev>r3</csw202.rev>
+    <csw202.tag>tags/r3</csw202.tag>
   </properties>
 </project>
