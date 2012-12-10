@@ -112,6 +112,14 @@
     </then>
   </if>
   <if>
+    <available file="${tests}/wcs/2.0.0"/>
+    <then>
+      <copy todir="${scripts}/wcs-2.0.0">
+         <fileset dir="${tests}/wcs/2.0.0/${wcs20.tag}" includes="**/*"/>
+      </copy>
+    </then>
+  </if>
+  <if>
     <available file="${tests}/csw/2.0.2"/>
     <then>
       <copy todir="${scripts}/csw-2.0.2">
@@ -164,6 +172,7 @@
       <filter token="wms13.rev" value="${wms13.rev}"/>
       <filter token="wcs10.rev" value="${wcs10.rev}"/>
       <filter token="wcs11.rev" value="${wcs11.rev}"/>
+      <filter token="wcs20.rev" value="${wcs20.rev}"/>
       <filter token="cs2202.rev" value="${csw202.rev}"/>
     </filterset>
   </copy>
@@ -294,6 +303,8 @@
     <wcs10.tag>trunk</wcs10.tag>
     <wcs11.rev>r0</wcs11.rev>
     <wcs11.tag>tags/r0</wcs11.tag>
+    <wcs20.rev>r5</wcs20.rev>
+    <wcs20.tag>tags/r5</wcs20.tag>
     <csw202.rev>r3</csw202.rev>
     <csw202.tag>tags/r3</csw202.tag>
   </properties>
