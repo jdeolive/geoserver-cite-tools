@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <values>
- <value key="url">http://localhost:8080/geoserver/ows?service=wcs&amp;version=1.1.1&amp;request=GetCapabilities</value>
+ <value key="url">http://localhost:8080/geoserver/ows?</value>
 </values>
